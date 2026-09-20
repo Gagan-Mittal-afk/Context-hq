@@ -1,13 +1,29 @@
-def chunk_text(text, chunk_size, overlap):
-    words = text.split()
+def chunk_text(text, chunk_size=500, overlap=100):
     chunks = []
 
-    step = chunk_size - overlap
+    start = 0
 
-    for start in range(0, len(words), step):
-        if start >= len(words) - overlap:
-            break
-        chunk = words[start:start + chunk_size]
-        chunks.append(" ".join(chunk))
+    while start < len(text):
+        end = start + chunk_size
+
+        chunk = text[start:end]
+        chunks.append(chunk)
+
+        start += chunk_size - overlap
 
     return chunks
+
+
+if __name__ == "__main__":
+    text = """
+    Machine learning is a branch of artificial intelligence.
+    It allows computers to learn patterns from data.
+    Supervised learning uses labelled data.
+    Unsupervised learning finds patterns in unlabelled data.
+    """
+
+    chunks = chunk_text(text, chunk_size=100, overlap=20)
+
+    for i, chunk in enumerate(chunks):
+        print(f"\nChunk {i + 1}:")
+        print(chunk)
