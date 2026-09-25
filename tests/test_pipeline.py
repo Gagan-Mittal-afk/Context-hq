@@ -23,10 +23,11 @@ for page_number, text in pages:
         documents.append(chunk)
 
         metadatas.append({
-            "source": "Context HQ Test Document.pdf",
-            "page": page_number,
-            "chunk": chunk_number
-        })
+        "document_id": "Context HQ Test Document",
+        "source": "Context HQ Test Document.pdf",
+        "page": page_number,
+        "chunk": chunk_number
+})
 
 
 print("Total chunks:", len(documents))

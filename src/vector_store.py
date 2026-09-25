@@ -13,13 +13,18 @@ def create_collection():
     return collection
 
 
-def add_documents(collection, documents, metadatas=None, document_name="document"):
+def add_documents(
+    collection,
+    documents,
+    metadatas=None,
+    document_name="document"
+):
     embeddings = generate_embeddings(documents)
 
     ids = [
-    f"{document_name}_chunk_{i}"
-    for i in range(len(documents))
-]
+        f"{document_name}_chunk_{i}"
+        for i in range(len(documents))
+    ]
 
     collection.add(
         ids=ids,
@@ -38,6 +43,34 @@ def search(collection, query, n_results=3):
     )
 
     return results
+
+
+def list_documents():
+    collection = create_collection()
+
+    data = collection.get(
+        include=["metadatas"]
+    )
+
+    documents = {}
+
+    for metadata in data["metadatas"]:
+        if not metadata:
+            continue
+
+        document_id = metadata.get("document_id")
+        source = metadata.get("source")
+
+        if document_id and source:
+            documents[document_id] = source
+
+    return [
+        {
+            "document_id": document_id,
+            "source": source
+        }
+        for document_id, source in documents.items()
+    ]
 
 
 if __name__ == "__main__":

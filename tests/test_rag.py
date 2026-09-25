@@ -3,7 +3,10 @@ from src.rag import ask
 
 question = "What is this document about?"
 
-result = ask(question)
+result = ask(
+    question,
+    document_id="Context HQ Test Document"
+)
 
 print("\nQuestion:")
 print(question)
