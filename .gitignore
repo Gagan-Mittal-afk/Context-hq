@@ -5,4 +5,4 @@ __pycache__/
 .vscode/
 .DS_Store
 chroma_db/
-.env
+.pytest_cache/

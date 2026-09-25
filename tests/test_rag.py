@@ -1,20 +1,22 @@
 from src.rag import ask
 
 
-question = "What is this document about?"
+def test_rag():
+    result = ask(
+        question="What is this document about?",
+        document_id="Context HQ Test Document"
+    )
 
-result = ask(
-    question,
-    document_id="Context HQ Test Document"
-)
+    assert isinstance(result, dict)
 
-print("\nQuestion:")
-print(question)
+    assert "answer" in result
+    assert "sources" in result
 
-print("\nAnswer:")
-print(result["answer"])
+    assert isinstance(result["answer"], str)
+    assert len(result["answer"].strip()) > 0
 
-print("\nSources:")
+    assert isinstance(result["sources"], list)
+    assert len(result["sources"]) > 0
 
-for source in result["sources"]:
-    print(source)
+    for source in result["sources"]:
+        assert source["document_id"] == "Context HQ Test Document"

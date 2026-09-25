@@ -1,7 +1,18 @@
 from src.chunker import chunk_text
 
-text = "A B C D E F G H I J"
 
-chunks = chunk_text(text, 4, 1)
+def test_chunk_text():
+    text = (
+        "Machine learning is a branch of artificial intelligence. "
+        "It allows computers to learn patterns from data."
+    )
 
-print(chunks)
+    chunks = chunk_text(
+        text,
+        chunk_size=50,
+        overlap=10
+    )
+
+    assert len(chunks) > 1
+    assert all(isinstance(chunk, str) for chunk in chunks)
+    assert all(len(chunk) <= 50 for chunk in chunks)

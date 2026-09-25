@@ -1,15 +1,25 @@
+import requests
+
 from src.llm import generate_answer
 
 
-context = """
-Python is a high-level programming language.
-It is widely used for web development, data science,
-machine learning, and automation.
-"""
+def test_generate_answer():
+    try:
+        response = requests.get(
+            "http://localhost:11434/api/tags",
+            timeout=5
+        )
+        response.raise_for_status()
 
-question = "What is Python commonly used for?"
+    except requests.RequestException:
+        raise AssertionError(
+            "Ollama is not running. Start Ollama before running this test."
+        )
 
-answer = generate_answer(context, question)
+    answer = generate_answer(
+        context="Python is a programming language.",
+        question="What is Python?"
+    )
 
-print("\nAnswer:")
-print(answer)
+    assert isinstance(answer, str)
+    assert len(answer.strip()) > 0
