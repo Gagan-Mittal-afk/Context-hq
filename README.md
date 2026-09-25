@@ -33,6 +33,24 @@ ContextHQ uses **Ollama + Qwen3:8b** for local LLM inference and **Sentence Tran
 
 ---
 
+---
+
+# 📸 Demo
+
+## 🖥️ ContextHQ Interface
+
+The ContextHQ interface allows users to upload PDFs, select documents, and interact with them through a conversational chat interface.
+
+![ContextHQ Interface](screenshots/interface.png)
+
+---
+
+## 🧠 RAG in Action
+
+ContextHQ retrieves relevant document chunks and provides the generated answer along with the source pages used for the response.
+
+![ContextHQ RAG Demo](screenshots/rag-demo.png)
+
 # 🧠 What is ContextHQ?
 
 ContextHQ is a **Retrieval-Augmented Generation system** designed to answer questions using information from user-provided documents.
